@@ -1,0 +1,14 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  pointer-events: none;
+}
+
+#app {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 20vw;
+  animation: fade-out 25s linear 0s forwards;
+}

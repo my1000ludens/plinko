@@ -1,0 +1,26 @@
+{
+  "name": "c",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://my1000ludens@github.com/my1000ludens/plinko.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/my1000ludens/plinko/issues"
+  },
+  "homepage": "https://github.com/my1000ludens/plinko#readme",
+  "devDependencies": {
+    "typescript": "^4.8.4",
+    "vite": "^3.1.8",
+    "vite-plugin-singlefile": "^0.12.3",
+    "vite-tsconfig-paths": "^3.5.2"
+  }
+}
