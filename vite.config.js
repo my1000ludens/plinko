@@ -1,14 +1,14 @@
-import { defineConfig } from 'vite'
-import { viteSingleFile } from 'vite-plugin-singlefile'
-import tsconfigPaths from 'vite-tsconfig-paths'
+import { defineConfig } from 'vite';
+import { viteSingleFile } from 'vite-plugin-singlefile';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   server: { port: 8080 },
   build: {
     outDir: '../docs',
-    emptyOutDir: true
+    emptyOutDir: true,
   },
   publicDir: '../public',
   root: 'src',
-  plugins: [tsconfigPaths(), viteSingleFile()],
-})
+  plugins: [tsconfigPaths({ root: '../' }), viteSingleFile()],
+});

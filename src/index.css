@@ -1,6 +1,5 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  pointer-events: none;
 }
 
 #app {
@@ -9,6 +8,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 
-  font-size: 20vw;
-  animation: fade-out 25s linear 0s forwards;
+  width: 50rem;
+  height: 70rem;
+
+  background-color: rgb(155, 155, 155);
 }
