@@ -25,14 +25,18 @@ export default class PhysicsAtom extends Atom {
     return this;
   }
 
-  collideWith(delta: number, atom: PhysicsAtom) {
+  willCollideWith(delta: number, atom: PhysicsAtom) {
     const postX = this.x + this.dx * delta;
     const postY = this.y + this.dy * delta;
     const postAtomX = atom.x + atom.dx * delta;
     const postAtomY = atom.y + atom.dy * delta;
     const postDistance = Math.sqrt((postX - postAtomX) ** 2 + (postY - postAtomY) ** 2);
-    const distance = Math.sqrt((this.x - atom.x) ** 2 + (this.y - atom.y) ** 2);
-    if (postDistance <= this.radius + atom.radius) {
+    return postDistance <= this.radius + atom.radius;
+  }
+
+  collideWith(delta: number, atom: PhysicsAtom) {
+    if (this.willCollideWith(delta, atom)) {
+      const distance = Math.sqrt((this.x - atom.x) ** 2 + (this.y - atom.y) ** 2);
       // 방향벡터
       const [dx, dy] = [this.x - atom.x, this.y - atom.y];
       // 단위벡터

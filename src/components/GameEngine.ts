@@ -1,6 +1,8 @@
 import Atom from '@/components/Atom';
 import Coin from '@/components/Coin';
+import CoinPocketBox from '@/components/CoinPocketBox';
 import PhysicsAtom from '@/components/PhysicsAtom';
+import PinBoard from '@/components/PinBoard';
 
 // const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -22,7 +24,9 @@ export default class GameEngine {
       const delta = Math.min(now - lastTime, DELTA_MAX);
       lastTime += delta;
 
-      this.update(delta / 1000);
+      for (let i = 0; i < delta / 5; i++) {
+        this.update(5 / 1000);
+      }
       this.render(this.ctx);
 
       // if (Math.random() < 0.01) {
@@ -44,11 +48,22 @@ export default class GameEngine {
   }
 
   update(delta: number) {
-    const pinBoard = this.atomList.find((atom) => atom instanceof PhysicsAtom) as PhysicsAtom;
+    // Remove dead atoms
+    this.atomList = this.atomList.filter((atom) => atom.alive);
+
+    const pinBoard = this.atomList.find((atom) => atom instanceof PinBoard) as PinBoard;
+    const coinPocketBox = this.atomList.find((atom) => atom instanceof CoinPocketBox) as CoinPocketBox;
     const coinList = this.atomList.filter((atom) => atom instanceof Coin) as Coin[];
+
+    // Coin·Pin Collision
     coinList.forEach((coin) => pinBoard.collideWith(delta, coin));
 
+    // Coin·CoinPocket Collision
+    coinList.forEach((coin) => coinPocketBox.collideWith(delta, coin));
+
     this.atomList.forEach((atom) => atom.update(delta));
+
+    this.atomList = this.atomList.filter((atom) => !atom.isOutOfScreen(this.ctx.canvas.width, this.ctx.canvas.height));
   }
 
   render(ctx: CanvasRenderingContext2D) {
