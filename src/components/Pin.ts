@@ -11,7 +11,7 @@ export default class Pin extends PhysicsAtom {
     this.x = x;
     this.y = y;
     this.radius = radius;
-    this.audio = new Audio('/A.wav');
+    this.audio = new Audio('./A.wav');
     this.duration = 0;
   }
 
