@@ -14,7 +14,6 @@ const resize = (canvas: HTMLCanvasElement) => {
   const canvas = document.getElementById('app') as HTMLCanvasElement;
 
   resize(canvas);
-  window.addEventListener('resize', () => resize(canvas));
 
   const width = canvas.width;
   const height = canvas.height;
@@ -25,17 +24,25 @@ const resize = (canvas: HTMLCanvasElement) => {
 
   gameEngine.run();
 
-  const pinBoard = new PinBoard(width * 0.5, height * 0.3, 20, width * 0.8);
-  const coinPocketBox = new CoinPocketBox(width * 0.5, height * 0.765, pinBoard.gap, pinBoard.rows + 1);
+  const pinBoard = new PinBoard(width * 0.5, height * 0.3, 10, width * 0.8);
+  const coinPocketBox = new CoinPocketBox(width * 0.5, pinBoard.pinList.slice(-1)[0].y + pinBoard.gap / 2, pinBoard.gap, pinBoard.rows + 1);
 
   gameEngine.add(pinBoard);
   gameEngine.add(coinPocketBox);
+
+  new Array(1000)
+    .fill('')
+    .forEach((_, i) =>
+      gameEngine.add(new Coin(width * 0.5 + pinBoard.gap * (i / 1000 - 0.5), pinBoard.pinList[0].y - pinBoard.gap, pinBoard.radius * 2).force(0, Math.pow(pinBoard.radius, 3)))
+    );
 
   // 인터페이스
   window.addEventListener('keydown', (e) => {
     if (e.keyCode === 32) {
       const [x, y] = [width * 0.5 + (Math.random() - 0.5) * width * 0.05, height * 0.27];
-      gameEngine.add(new Coin(x, y, pinBoard.radius * 2).force(0, 1000));
+      // gameEngine.add(new Coin(x, y, pinBoard.radius * 2).force(0, Math.pow(pinBoard.radis,2 )));
+      gameEngine.add(new Coin(width * 0.5 + -0.45 * width * 0.05, height * 0.27, pinBoard.radius * 2).force(0, Math.pow(pinBoard.radius, 3)));
+      gameEngine.add(new Coin(width * 0.5 + 0.45 * width * 0.05, height * 0.27, pinBoard.radius * 2).force(0, Math.pow(pinBoard.radius, 3)));
     }
   });
 })();

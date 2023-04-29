@@ -51,6 +51,9 @@ export default class GameEngine {
     // Remove dead atoms
     this.atomList = this.atomList.filter((atom) => atom.alive);
 
+    // Remove out-of-screen atoms
+    this.atomList = this.atomList.filter((atom) => !atom.isOutOfScreen(this.ctx.canvas.width, this.ctx.canvas.height));
+
     const pinBoard = this.atomList.find((atom) => atom instanceof PinBoard) as PinBoard;
     const coinPocketBox = this.atomList.find((atom) => atom instanceof CoinPocketBox) as CoinPocketBox;
     const coinList = this.atomList.filter((atom) => atom instanceof Coin) as Coin[];
@@ -61,9 +64,8 @@ export default class GameEngine {
     // Coin·CoinPocket Collision
     coinList.forEach((coin) => coinPocketBox.collideWith(delta, coin));
 
+    // update
     this.atomList.forEach((atom) => atom.update(delta));
-
-    this.atomList = this.atomList.filter((atom) => !atom.isOutOfScreen(this.ctx.canvas.width, this.ctx.canvas.height));
   }
 
   render(ctx: CanvasRenderingContext2D) {

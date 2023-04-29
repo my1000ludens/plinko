@@ -3,13 +3,11 @@ import PhysicsAtom from '@/components/PhysicsAtom';
 import { PIN_RADIUS_RATIO } from '@/constant';
 
 export default class CoinPocketBox extends PhysicsAtom {
-  count: number;
   coinPocketList: CoinPocket[];
 
   constructor(x: number, y: number, width: number, numberOfPockets: number) {
     super(x, y);
 
-    this.count = 0;
     this.coinPocketList = [];
 
     const size = width * (1 - PIN_RADIUS_RATIO * 2);

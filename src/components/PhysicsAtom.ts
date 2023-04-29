@@ -1,4 +1,5 @@
 import Atom from '@/components/Atom';
+import { BOUNCE_LOSS_RATIO } from '@/constant';
 
 export default class PhysicsAtom extends Atom {
   dx: number;
@@ -45,8 +46,8 @@ export default class PhysicsAtom extends Atom {
       const [x1, y1] = [this.dx, this.dy];
       const [x2, y2] = [atom.dx, atom.dy];
       // 내적
-      const dot1 = (x1 * ux + y1 * uy) * 0.8;
-      const dot2 = (x2 * ux + y2 * uy) * 0.8;
+      const dot1 = (x1 * ux + y1 * uy) * BOUNCE_LOSS_RATIO;
+      const dot2 = (x2 * ux + y2 * uy) * BOUNCE_LOSS_RATIO;
       // 투영 벡터
       const [tx1, ty1] = [dot1 * ux, dot1 * uy];
       const [tx2, ty2] = [dot2 * ux, dot2 * uy];

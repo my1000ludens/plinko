@@ -8,6 +8,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 50rem;
-  height: 70rem;
+  width: 100vw;
+  height: 140vw;
+  max-width: 50rem;
+  max-height: 70rem;
 }
