@@ -8,7 +8,7 @@ export default class Coin extends PhysicsAtom {
   render(ctx: CanvasRenderingContext2D): void {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+    ctx.fillStyle = 'rgba(150, 150, 150, 0.8)';
     ctx.fill();
     ctx.closePath();
   }

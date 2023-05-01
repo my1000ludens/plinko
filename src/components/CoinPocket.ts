@@ -35,7 +35,7 @@ export default class CoinPocket extends PhysicsAtom {
 
   render(ctx: CanvasRenderingContext2D): void {
     ctx.beginPath();
-    ctx.rect(this.x - this.size * 0.5, this.y - this.size * 0.5, this.size, this.size);
+    ctx.roundRect(this.x - this.size * 0.5, this.y - this.size * 0.5, this.size, this.size, Math.sqrt(this.size));
     ctx.fillStyle = '#999999';
     ctx.fill();
     ctx.fillStyle = '#000000';
